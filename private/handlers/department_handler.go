@@ -81,14 +81,7 @@ func CreateDepartment(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteDepartment(w http.ResponseWriter, r *http.Request) {
-	var department models.Department
-
-	err := json.NewDecoder(r.Body).Decode(&department)
-	if err != nil {
-		http.Error(w, "Failed to decode department data", http.StatusBadRequest)
-		return
-	}
-
+	departmentID := chi.URLParam(r, "id")
 	repo, err := db.NewDepartmentRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
@@ -96,7 +89,7 @@ func DeleteDepartment(w http.ResponseWriter, r *http.Request) {
 	}
 	defer repo.Close()
 
-	err = repo.DeleteDepartment(department.ID)
+	err = repo.DeleteDepartment(departmentID)
 	if err != nil {
 		http.Error(w, "Failed to delete department", http.StatusInternalServerError)
 		return
@@ -106,6 +99,7 @@ func DeleteDepartment(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateDepartment(w http.ResponseWriter, r *http.Request) {
+	departmentID := chi.URLParam(r, "id")
 	var department models.Department
 	err := json.NewDecoder(r.Body).Decode(&department)
 	if err != nil {
@@ -120,7 +114,7 @@ func UpdateDepartment(w http.ResponseWriter, r *http.Request) {
 	}
 	defer repo.Close()
 
-	err = repo.UpdateDepartment(department.ID, department.Name)
+	err = repo.UpdateDepartment(departmentID, department.Name)
 	if err != nil {
 		http.Error(w, "Failed to update department", http.StatusInternalServerError)
 		return
