@@ -29,14 +29,14 @@ func NewDepartmentRepository() (*DepartmentRepository, error) {
 	}, nil
 }
 
-func (r *DepartmentRepository) GetAllDepartments() ([]models.Department, error) {
+func (r *DepartmentRepository) GetDepartments() ([]models.Department, error) {
 	rows, err := r.pool.Query(context.Background(), "SELECT id, name FROM department")
 	if err != nil {
 		var pgErr *pgconn.PgError
 		if errors.As(err, &pgErr) {
-			return nil, fmt.Errorf("Failed to fetch departments: %w", pgErr)
+			return nil, fmt.Errorf("Failed to fetch department: %w", pgErr)
 		}
-		return nil, fmt.Errorf("Failed to fetch departments: %w", err)
+		return nil, fmt.Errorf("Failed to fetch department: %w", err)
 	}
 	defer rows.Close()
 
@@ -55,9 +55,9 @@ func (r *DepartmentRepository) GetAllDepartments() ([]models.Department, error) 
 		if err := rows.Err(); err != nil {
 			var pgErr *pgconn.PgError
 			if errors.As(err, &pgErr) {
-				return nil, fmt.Errorf("Error occurred while fetching departments: %w", pgErr)
+				return nil, fmt.Errorf("Error occurred while fetching department: %w", pgErr)
 			}
-			return nil, fmt.Errorf("Error occurred while fetching departments: %w", err)
+			return nil, fmt.Errorf("Error occurred while fetching department: %w", err)
 		}
 	}
 	return departments, nil

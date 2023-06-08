@@ -9,7 +9,7 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-func GetAllDepartments(w http.ResponseWriter, r *http.Request) {
+func GetDepartments(w http.ResponseWriter, r *http.Request) {
 	repo, err := db.NewDepartmentRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
@@ -17,7 +17,7 @@ func GetAllDepartments(w http.ResponseWriter, r *http.Request) {
 	}
 	defer repo.Close()
 
-	departments, err := repo.GetAllDepartments()
+	departments, err := repo.GetDepartments()
 	if err != nil {
 		http.Error(w, "Failed to fetch departments", http.StatusInternalServerError)
 		return
