@@ -12,7 +12,13 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	r.Get("/", handlers.HelloHandler)
-	r.Get("/departments", handlers.GetAllDepartments)
-	r.Get("/departments/{id}", handlers.GetAllDepartmentByID)
+	r.Route("/departments", func(r chi.Router) {
+		r.Get("/", handlers.GetAllDepartments)
+		r.Post("/", handlers.CreateDepartment)
+		r.Delete("/", handlers.DeleteDepartment)
+
+		r.Get("/{id}", handlers.GetDepartmentByID)
+		r.Put("/{id}", handlers.UpdateDepartment)
+	})
 	http.ListenAndServe(":8080", r)
 }

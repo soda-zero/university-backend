@@ -101,7 +101,7 @@ func (r *DepartmentRepository) DeleteDepartment(departmentID string) error {
 	return nil
 }
 
-func (r *DepartmentRepository) UpdateDepartment(departmentID int, newName string) error {
+func (r *DepartmentRepository) UpdateDepartment(departmentID string, newName string) error {
 	query := "UPDATE department SET name = $1 WHERE id = $2"
 	_, err := r.pool.Exec(context.Background(), query, newName, departmentID)
 	if err != nil {
