@@ -1,9 +1,37 @@
 # TODO
 ## Repostiories:
-    [x] - CareerLevel
-    [x] - Course
-    [x] - Department
+- [x]   CareerLevel
+- [x]   Course
+- [x]   Department
+- [ ]   Career
+- [ ]   Professor
+- [ ]   Evaluation_type
+- [ ]   Room
+- [ ]   Student
+- [ ]   CareerStatus
+- [ ]   ProfessorCourse
+- [ ]   CourseDependency
+- [ ]   CourseOcurrence
+- [ ]   AssistantProfessor
+- [ ]   Schedule
+- [ ]   CareerEnrollment
+- [ ]   CourseEnrollment
+- [ ]   CareerEnrollmentEvaluation
 ## Handlers:
-    [x] - CareerLevel
-    [x] - Course
-    [x] - Department
+- [x]   CareerLevel
+- [x]   Course
+- [x]   Department
+- [ ]   Career
+- [ ]   Professor
+- [ ]   Evaluation_type
+- [ ]   Room
+- [ ]   Student
+- [ ]   CareerStatus
+- [ ]   ProfessorCourse
+- [ ]   CourseDependency
+- [ ]   CourseOcurrence
+- [ ]   AssistantProfessor
+- [ ]   Schedule
+- [ ]   CareerEnrollment
+- [ ]   CourseEnrollment
+- [ ]   CareerEnrollmentEvaluation
