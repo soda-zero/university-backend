@@ -7,4 +7,3 @@ type Room struct {
 	Capacity int    `json:"capacity"`
 	Location string `json:"location"`
 }
-

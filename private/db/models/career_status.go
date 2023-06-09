@@ -1,4 +1,5 @@
 package models
+
 import "time"
 
 type CareerStatus struct {
@@ -6,4 +7,3 @@ type CareerStatus struct {
 	Name      string     `json:"name"`
 	UpdatedAt *time.Time `json:"updated_at"`
 }
-

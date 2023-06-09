@@ -12,4 +12,3 @@ type CourseOcurrence struct {
 	CourseID      string    `json:"course_id"`
 	ProfessorID   string    `json:"professor_id"`
 }
-
