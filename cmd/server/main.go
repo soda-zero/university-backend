@@ -14,7 +14,7 @@ func main() {
 	r.Get("/", handlers.HelloHandler)
 
 	r.Route("/departments", func(r chi.Router) {
-		r.Get("/", handlers.GetAllDepartments)
+		r.Get("/", handlers.GetDepartments)
 		r.Post("/", handlers.CreateDepartment)
 
 		r.Get("/{id}", handlers.GetDepartmentByID)
@@ -29,6 +29,14 @@ func main() {
 		r.Get("/{id}", handlers.GetCareerLevelByID)
 		r.Put("/{id}", handlers.UpdateCareerLevel)
 		r.Delete("/{id}", handlers.DeleteCareerLevel)
+	})
+	r.Route("/courses", func(r chi.Router) {
+		r.Get("/", handlers.GetCourses)
+		r.Post("/", handlers.CreateCourse)
+
+		r.Get("/{id}", handlers.GetCourseByID)
+		r.Put("/{id}", handlers.UpdateCourse)
+		r.Delete("/{id}", handlers.DeleteCourse)
 	})
 	http.ListenAndServe(":8080", r)
 }

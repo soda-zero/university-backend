@@ -73,7 +73,6 @@ func (r *DepartmentRepository) GetDepartmentByID(departmentID string) (models.De
 		}
 		return models.Department{}, fmt.Errorf("Error occurred while fetching department: %w", err)
 	}
-
 	return department, nil
 }
 

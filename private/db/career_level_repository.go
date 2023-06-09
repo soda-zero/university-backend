@@ -51,7 +51,6 @@ func (r *CareerLevelRepository) GetCareerLevels() ([]models.CareerLevel, error) 
 			return nil, fmt.Errorf("Failed to scan career_level data: %w", err)
 		}
 		careerLevels = append(careerLevels, career)
-
 		if err := rows.Err(); err != nil {
 			var pgErr *pgconn.PgError
 			if errors.As(err, &pgErr) {
@@ -73,7 +72,6 @@ func (r *CareerLevelRepository) GetCareerLevelByID(careerLevelID string) (models
 		}
 		return models.CareerLevel{}, fmt.Errorf("Error occurred while fetching career_level: %w", err)
 	}
-
 	return careerLevel, nil
 }
 
