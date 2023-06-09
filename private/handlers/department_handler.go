@@ -3,14 +3,14 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
-	"zeroCalSoda/university-backend/private/db"
 	"zeroCalSoda/university-backend/private/db/models"
+	"zeroCalSoda/university-backend/private/db/repositories"
 
 	"github.com/go-chi/chi/v5"
 )
 
 func GetDepartments(w http.ResponseWriter, r *http.Request) {
-	repo, err := db.NewDepartmentRepository()
+	repo, err := repositories.NewDepartmentRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -34,7 +34,7 @@ func GetDepartments(w http.ResponseWriter, r *http.Request) {
 func GetDepartmentByID(w http.ResponseWriter, r *http.Request) {
 	departmentID := chi.URLParam(r, "id")
 
-	repo, err := db.NewDepartmentRepository()
+	repo, err := repositories.NewDepartmentRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -65,7 +65,7 @@ func CreateDepartment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	repo, err := db.NewDepartmentRepository()
+	repo, err := repositories.NewDepartmentRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -82,7 +82,7 @@ func CreateDepartment(w http.ResponseWriter, r *http.Request) {
 
 func DeleteDepartment(w http.ResponseWriter, r *http.Request) {
 	departmentID := chi.URLParam(r, "id")
-	repo, err := db.NewDepartmentRepository()
+	repo, err := repositories.NewDepartmentRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -107,7 +107,7 @@ func UpdateDepartment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	repo, err := db.NewDepartmentRepository()
+	repo, err := repositories.NewDepartmentRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return

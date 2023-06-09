@@ -3,14 +3,14 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
-	"zeroCalSoda/university-backend/private/db"
 	"zeroCalSoda/university-backend/private/db/models"
+	"zeroCalSoda/university-backend/private/db/repositories"
 
 	"github.com/go-chi/chi/v5"
 )
 
 func GetCourses(w http.ResponseWriter, r *http.Request) {
-	repo, err := db.NewCourseRepository()
+	repo, err := repositories.NewCourseRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -34,7 +34,7 @@ func GetCourses(w http.ResponseWriter, r *http.Request) {
 func GetCourseByID(w http.ResponseWriter, r *http.Request) {
 	courseID := chi.URLParam(r, "id")
 
-	repo, err := db.NewCourseRepository()
+	repo, err := repositories.NewCourseRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -65,7 +65,7 @@ func CreateCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	repo, err := db.NewCourseRepository()
+	repo, err := repositories.NewCourseRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -83,7 +83,7 @@ func CreateCourse(w http.ResponseWriter, r *http.Request) {
 func DeleteCourse(w http.ResponseWriter, r *http.Request) {
 	courseID := chi.URLParam(r, "id")
 
-	repo, err := db.NewCourseRepository()
+	repo, err := repositories.NewCourseRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -108,7 +108,7 @@ func UpdateCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	repo, err := db.NewCourseRepository()
+	repo, err := repositories.NewCourseRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return

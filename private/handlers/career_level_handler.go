@@ -3,14 +3,14 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
-	"zeroCalSoda/university-backend/private/db"
 	"zeroCalSoda/university-backend/private/db/models"
+	"zeroCalSoda/university-backend/private/db/repositories"
 
 	"github.com/go-chi/chi/v5"
 )
 
 func GetCareerLevels(w http.ResponseWriter, r *http.Request) {
-	repo, err := db.NewCareerLevelRepository()
+	repo, err := repositories.NewCareerLevelRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -34,7 +34,7 @@ func GetCareerLevels(w http.ResponseWriter, r *http.Request) {
 func GetCareerLevelByID(w http.ResponseWriter, r *http.Request) {
 	careerLevelID := chi.URLParam(r, "id")
 
-	repo, err := db.NewCareerLevelRepository()
+	repo, err := repositories.NewCareerLevelRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -65,7 +65,7 @@ func CreateCareerLevel(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	repo, err := db.NewCareerLevelRepository()
+	repo, err := repositories.NewCareerLevelRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -83,7 +83,7 @@ func CreateCareerLevel(w http.ResponseWriter, r *http.Request) {
 func DeleteCareerLevel(w http.ResponseWriter, r *http.Request) {
 	careerLevelID := chi.URLParam(r, "id")
 
-	repo, err := db.NewCareerLevelRepository()
+	repo, err := repositories.NewCareerLevelRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return
@@ -108,7 +108,7 @@ func UpdateCareerLevel(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	repo, err := db.NewCareerLevelRepository()
+	repo, err := repositories.NewCareerLevelRepository()
 	if err != nil {
 		http.Error(w, "Failed to connect to the database", http.StatusInternalServerError)
 		return

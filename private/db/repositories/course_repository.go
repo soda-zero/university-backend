@@ -1,9 +1,10 @@
-package db
+package repositories
 
 import (
 	"context"
 	"errors"
 	"fmt"
+	"zeroCalSoda/university-backend/private/db"
 	"zeroCalSoda/university-backend/private/db/models"
 
 	"github.com/jackc/pgx/v5/pgconn"
@@ -19,7 +20,7 @@ func (r *CourseRepository) Close() {
 }
 
 func NewCourseRepository() (*CourseRepository, error) {
-	pool, err := ConnectPg()
+	pool, err := db.ConnectPg()
 	if err != nil {
 		return nil, fmt.Errorf("Unable to connect to te database: %v", err)
 	}

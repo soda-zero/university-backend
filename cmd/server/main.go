@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http"
 	"zeroCalSoda/university-backend/private/handlers"
 
@@ -11,7 +12,7 @@ import (
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
-	r.Get("/", handlers.HelloHandler)
+	r.Get("/", helloHandler)
 
 	r.Route("/departments", func(r chi.Router) {
 		r.Get("/", handlers.GetDepartments)
@@ -39,4 +40,14 @@ func main() {
 		r.Delete("/{id}", handlers.DeleteCourse)
 	})
 	http.ListenAndServe(":8080", r)
+}
+
+func helloHandler(w http.ResponseWriter, r *http.Request) {
+	message := "Hello fella 🍌"
+	response := map[string]interface{}{
+		"message": message,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
