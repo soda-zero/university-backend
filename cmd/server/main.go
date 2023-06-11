@@ -48,6 +48,14 @@ func main() {
 		r.Put("/{id}", handlers.UpdateCareer)
 		r.Delete("/{id}", handlers.DeleteCareer)
 	})
+	r.Route("/professors", func(r chi.Router) {
+		r.Get("/", handlers.GetProfessors)
+		r.Post("/", handlers.CreateProfessor)
+
+		r.Get("/{id}", handlers.GetProfessorByID)
+		r.Put("/{id}", handlers.UpdateProfessor)
+		r.Delete("/{id}", handlers.DeleteProfessor)
+	})
 	http.ListenAndServe(":8080", r)
 }
 
