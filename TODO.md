@@ -3,7 +3,7 @@
 - [x]   CareerLevel
 - [x]   Course
 - [x]   Department
-- [ ]   Career
+- [x]   Career
 - [ ]   Professor
 - [ ]   Evaluation_type
 - [ ]   Room
