@@ -124,3 +124,27 @@ CREATE TABLE IF NOT EXISTS career_enrollment_evaluation(
     evaluation_date DATE,
     final_score DECIMAL(5,2)
 );
+
+-- Session
+CREATE TABLE IF NOT EXISTS users(
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS token(
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id UUID NOT NULL,
+    token_value VARCHAR(100) NOT NULL,
+    expiration TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES admin(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS session(
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id UUID NOT NULL,
+    token VARCHAR(100) NOT NULL,
+    expiration TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+

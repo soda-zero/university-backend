@@ -32,7 +32,7 @@ func (r *ProfessorRepository) GetProfessors() ([]models.Professor, error) {
 	query := "SELECT id, name, last_name, email, phone_number FROM professor"
 	rows, err := r.pool.Query(context.Background(), query)
 	if err != nil {
-		utils.HandlePgError(fmt.Errorf("Failed to fetch professors"))
+		utils.HandlePgError(err)
 	}
 	defer rows.Close()
 
@@ -40,12 +40,12 @@ func (r *ProfessorRepository) GetProfessors() ([]models.Professor, error) {
 	for rows.Next() {
 		professor := models.Professor{}
 		if err := rows.Scan(&professor.ID, &professor.Name, &professor.Email, &professor.PhoneNumber); err != nil {
-			utils.HandlePgError(fmt.Errorf("Failed to scan professor data: %w", err))
+			return []models.Professor{}, utils.HandlePgError(err)
 		}
 		professors = append(professors, professor)
 
 		if err := rows.Err(); err != nil {
-			utils.HandlePgError(fmt.Errorf("Error ocurred while fetching professor data: %w", err))
+			return []models.Professor{}, utils.HandlePgError(err)
 		}
 	}
 	return professors, nil
@@ -56,7 +56,7 @@ func (r *ProfessorRepository) GetProfessorByID(professorID string) (models.Profe
 	query := "SELECT id, name, last_name, email, phone_number FROM professor WHERE id = $1"
 	err := r.pool.QueryRow(context.Background(), query, professorID).Scan(&professor.ID, &professor.Name, &professor.LastName, &professor.Email, &professor.PhoneNumber)
 	if err != nil {
-		utils.HandlePgError(fmt.Errorf("Failed to fetch professor: %w", err))
+		return models.Professor{}, utils.HandlePgError(err)
 	}
 	return professor, nil
 }
@@ -65,7 +65,7 @@ func (r *ProfessorRepository) CreateProfessor(professorData models.Professor) er
 	query := "INSERT INTO professor(name, last_name, email, phone_number) VALUES ($1, $2, $3, $4)"
 	_, err := r.pool.Exec(context.Background(), query, professorData)
 	if err != nil {
-		utils.HandlePgError(fmt.Errorf("Error ocurred while inserting professor: %w", err))
+		return utils.HandlePgError(err)
 	}
 	return nil
 }
@@ -73,7 +73,7 @@ func (r *ProfessorRepository) DeleteProfessor(professorID string) error {
 	query := "DELETE FROM professor WHERE id = $1"
 	_, err := r.pool.Exec(context.Background(), query, professorID)
 	if err != nil {
-		utils.HandlePgError(fmt.Errorf("Error ocurred while deleting professor: %w", err))
+		return utils.HandlePgError(err)
 	}
 	return nil
 }
@@ -82,7 +82,7 @@ func (r *ProfessorRepository) UpdateProfessor(professorID string, professorData 
 	query := "UPDATE professors SET name = COALESCE($1, name), last_name = COALESCE($2 last_name), email = COALESCE($3, email), phone_number = COALESCE($4, phone_number) WHERE id = $5"
 	_, err := r.pool.Exec(context.Background(), query, professorData.Name, professorData.LastName, professorData.Email, professorData.PhoneNumber, professorID)
 	if err != nil {
-		utils.HandlePgError(fmt.Errorf("Error ocurred while updating professor: %w", err))
+		return utils.HandlePgError(err)
 	}
 	return nil
 }

@@ -4,7 +4,7 @@
 - [x]   Course
 - [x]   Department
 - [x]   Career
-- [ ]   Professor
+- [x]   Professor
 - [ ]   Evaluation_type
 - [ ]   Room
 - [ ]   Student
@@ -22,7 +22,7 @@
 - [x]   Course
 - [x]   Department
 - [x]   Career
-- [ ]   Professor
+- [x]   Professor
 - [ ]   Evaluation_type
 - [ ]   Room
 - [ ]   Student

@@ -2,7 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"zeroCalSoda/university-backend/private/auth"
 	"zeroCalSoda/university-backend/private/handlers"
 
 	"github.com/go-chi/chi/v5"
@@ -10,6 +12,7 @@ import (
 )
 
 func main() {
+	const PORT string = "8080"
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	r.Get("/", helloHandler)
@@ -56,7 +59,13 @@ func main() {
 		r.Put("/{id}", handlers.UpdateProfessor)
 		r.Delete("/{id}", handlers.DeleteProfessor)
 	})
-	http.ListenAndServe(":8080", r)
+
+	r.Route("/auth", func(r chi.Router) {
+		r.Post("/signup", auth.SignupHandler)
+		r.Post("/signin", auth.SigninHandler)
+	})
+	fmt.Println("Listening on port: " + PORT)
+	http.ListenAndServe(":"+PORT, r)
 }
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {

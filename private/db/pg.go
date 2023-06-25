@@ -18,7 +18,8 @@ func ConnectPg() (*pgxpool.Pool, error) {
 	dbUrl := os.Getenv("DATABASE_URL")
 	pool, err := pgxpool.New(context.Background(), dbUrl)
 	if err != nil {
-		return nil, fmt.Errorf("Unable to create connection pool: %v", err)
+		fmt.Fprintf(os.Stderr, "Unable to create connection pool: %v\n", err)
+		os.Exit(1)
 	}
 
 	return pool, nil
